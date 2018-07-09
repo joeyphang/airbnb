@@ -16,4 +16,7 @@ Rails.application.routes.draw do
 
 
 resources :listings # creates all crud restful routes
+
+patch 'listings/:id/verify' => "listings#verify", as: 'verify'
+
 end
