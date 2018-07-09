@@ -1,0 +1,36 @@
+<%= @listing.title %>
+
+
+<%= form_with scope: :listing, url: listing_path(@listing)  model: :patch do |form| %>
+	<%= form.label :title %> :
+	<%= form.text_field :title, autocomplete: :off %> <br/>
+
+	<%= form.label :description %> :
+	<%= form.text_field :description, autocomplete: :off %> <br/>
+
+	<%= form.label :country %> :
+	<%= form.country_select :country %><br/>
+
+	<%= form.label :price %> :
+	<%= form.number_field :price %> <br/>
+
+	<%= form.label :num_of_guest %> :
+	<%= form.number_field :num_of_guest %> <br/>
+
+	<%= form.label :num_of_bedroom %> :
+	<%= form.number_field :num_of_bedroom %> <br/>
+
+	<%= form.label :num_of_bath %> :
+	<%= form.number_field :num_of_bath %> <br/>	
+
+	<%= form.label :amenities %> :
+	<%= form.label 'wifi' %>
+	<%= form.check_box :amenities, {multiple:true}, 'wifi', nil %> 
+	<%= form.label 'smoking' %>
+	<%= form.check_box :amenities, {multiple:true}, 'smoking', nil %>
+	<%= form.label 'towels' %>
+	<%= form.check_box :amenities, {multiple:true}, 'towels', nil %> <br/>
+
+	<%= form.submit %>
+
+<% end %>
