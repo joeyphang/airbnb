@@ -6,11 +6,12 @@ class Reservation < ApplicationRecord
     validates_presence_of :start_date, :end_date
     validate :end_date_is_after_start_date
     validate :overlapping_reservations
+    # before_save :calculate_price
 
-    # Checks if the booking start date is in the past
+    ## Checks if the booking start date is in the past
    def check_dates
        if start_date.present? && start_date < Date.today
-           errors.add(:check_in_date, message:"Unavailable")
+           errors.add(:check_in_date, message: "Dates unavailable.")
        end
    end
 
@@ -32,15 +33,22 @@ class Reservation < ApplicationRecord
        end
    end
 
+   	# def calculate_price
+	# 	self.total_price = self.listing.price * (self.start.to_start - self.end.to_date).to_i
+	# 	p "hello"
+		
+	# end
+
    private    
-	   # Checks if a given reservation overlaps this reservation    
+	   ## Checks if a given reservation overlaps this reservation    
 	   def overlaps?(other)
 	       self.start_date <= other.end_date && other.start_date <= self.end_date
 	   end
 
+
 	# validate :check_overlapping_dates
 
-	# before_save :calculate_price
+	
 
 	## check if a given interval overlaps this interval
 
@@ -52,10 +60,6 @@ class Reservation < ApplicationRecord
 	# 	return true
 	# end
 
-	# def calculate_price
-	# 	self.total_price = self.listing.price * (self.start.to_start - self.end.to_date).to_i
-	# 	p "hello"
-		
-	# end
+
 
 end

@@ -20,12 +20,21 @@ resources :listings do
 
 end
 
+#   resources :reservations do 
+#     resources :payments
+
+# end
+
 patch 'listings/:id/verify' => "listings#verify", as: 'verify'
 
 resources :reservations, only: [:create, :new, :show]
 
 resources :users, controller:"users", only: [:edit, :update, :show]
 ##resources :users, only: [:edit, :update, :show]
+
+get 'reservations/:id/payments/new' => "payments#new", as: 'new_payment'
+post 'reservations/:id/payments/checkout' => "payments#checkout", as: 'payment_checkout'
+
 
 
 end
