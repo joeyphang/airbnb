@@ -1,0 +1,18 @@
+<h3>Reservation Details</h3>
+	
+	Reservation date: <%= @reservations.start_date %> - <%= @reservations.end_date %> <br/>
+	Title: <%= @listing.title %> <br/>
+	Description: <%= @listing.title %> <br/>
+	Country: <%= @listing.country %> <br/>
+	Amenities: <% @listing.amenities.each do |x| %>
+	<li>
+		<%= x %>
+	</li>
+
+	<% end %>
+
+	Number of guest: <%= @listing.num_of_guest %> <br/>
+	Number of bedroom: <%= @listing.num_of_bedroom %> <br/>
+	Number of bath: <%= @listing.num_of_bath %> <br/>
+	<br> Price: <%= @listing.price %>
+

@@ -1,0 +1,20 @@
+<% if signed_in? -%>
+    	<h3> Profile Details </h3>
+    	<%= image_tag @users.avatar_url.to_s %> <br/>
+    	User Email:
+	    <%= @users.email %> <br/>
+	    User Role:
+	    <%= @users.role %> <br/>
+	    User id:
+	    <%= @users.id %> <br/>
+
+	    <%= form_with  model: @users do |image| %>
+	      	<%= image.label :Upload_Image %> :
+			<%= image.file_field :avatar %> <hr>
+			<%= image.submit %>
+
+			
+		
+
+		<% end %>
+<% end %>

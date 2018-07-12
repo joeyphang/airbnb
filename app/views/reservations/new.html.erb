@@ -1,0 +1,15 @@
+Make reservations
+
+<!-- <#%= form_with scope: :reservation, url: listing_reservations_path %>
+ -->
+<%= form_with model: [@listing, @reservations] do |r| %>
+	<%= r.label :start_date %> :
+	<%= r.date_field :start_date %> <br/>
+
+	<%= r.label :end_date %> :
+	<%= r.date_field  :end_date %> <br/>
+
+
+	<%= r.submit %>
+
+<% end %>

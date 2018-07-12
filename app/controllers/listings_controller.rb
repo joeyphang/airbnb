@@ -23,6 +23,7 @@ class ListingsController < ApplicationController
 
 	def show
 		@listing = Listing.find(params[:id])
+		
 	end
 
 	def edit  ## only current_user || admin can edit
