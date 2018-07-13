@@ -4,26 +4,43 @@ class PaymentsController < ApplicationController
 		@client_token = Braintree::ClientToken.generate
 
 		@reservations = Reservation.find(params[:id])
+
+		## passing the price into payment form
+		@listing = @reservations.listing
+		@price = @reservations.listing.price
+		@total_price = @price * (@reservations.end_date - @reservations.start_date).to_i
 	end
 
 	def checkout
-	  nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
 
-	  result = Braintree::Transaction.sale(
-	   :amount => "10.00", #this is currently hardcoded
+		## passing the price into checkout
+
+		@reservations = Reservation.find(params[:id])
+		@reservations.user_id = current_user.id
+		@listing = @reservations.listing
+		@price = @reservations.listing.price
+		@total_price = @price * (@reservations.end_date - @reservations.start_date).to_i
+
+		nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
+
+		result = Braintree::Transaction.sale(
+	   :amount => @total_price, ##
 	   :payment_method_nonce => nonce_from_the_client,
 	   :options => {
-	      :submit_for_settlement => true
-	    }
+	   	:submit_for_settlement => true
+	   }
 	   )
 
-	  if result.success?
-	  	redirect_to root_path 
-		flash[:success] = "Payment Successful"
-	  else
-	  	redirect_to root_path
-		flash[:error] =  "Transaction failed. Please try again."
-	  end
+		if result.success?
+			@reservations.update(:payment => true)
+
+			flash[:success] = "Payment Successful"
+			redirect_to reservation_path(@reservations)
+			
+		else
+			flash[:error] =  "Transaction failed. Please try again."
+			redirect_to root_path
+		end
 	end
 
 end

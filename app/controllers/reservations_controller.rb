@@ -26,9 +26,11 @@ class ReservationsController < ApplicationController
 
 	def show
 		@reservations = Reservation.find(params[:id])
-		@listing = Listing.find(params[:listing_id])
+		@listing = @reservations.listing
 		@reservations.listing_id = params[:listing_id]
 		@reservations.user_id = current_user.id
+		@price = @listing.price
+		@total_price = @price * (@reservations.end_date - @reservations.start_date).to_i
 
 	end
 
@@ -49,8 +51,8 @@ class ReservationsController < ApplicationController
 
 
 	private
-		def reservation_params
-			params.require(:reservation).permit(:start_date, :end_date, :price, :total, :user_id, :listing_id)
+	def reservation_params
+		params.require(:reservation).permit(:start_date, :end_date, :price, :total, :user_id, :listing_id)
 
-		end
+	end
 end

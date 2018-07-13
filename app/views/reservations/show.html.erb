@@ -14,6 +14,10 @@
 	Number of guest: <%= @listing.num_of_guest %> <br/>
 	Number of bedroom: <%= @listing.num_of_bedroom %> <br/>
 	Number of bath: <%= @listing.num_of_bath %> <br/>
-	<br> Price: <%= @listing.price %> <br/>
+	<br> <%= "Total Price: #{@total_price}" %> <br/>
 
-<%= button_to "Make Payment", new_payment_path(@reservations), method: :get %>
+	<% if current_user.customer? %>
+		<% if !@reservations.payment %>
+			<%= button_to "Make Payment", new_payment_path(@reservations), method: :get %>
+		<% end %>
+	<% end %>
