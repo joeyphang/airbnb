@@ -24,16 +24,17 @@ class PaymentsController < ApplicationController
 		nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
 
 		result = Braintree::Transaction.sale(
-	   :amount => @total_price, ##
-	   :payment_method_nonce => nonce_from_the_client,
-	   :options => {
-	   	:submit_for_settlement => true
-	   }
+		   :amount => @total_price, ##
+		   :payment_method_nonce => nonce_from_the_client,
+		   :options => {
+		   	:submit_for_settlement => true
+		   }
 	   )
 		if result.success?
 			@reservations.update(:payment => true)
-			ReservationMailer.reservation_email(current_user.email, @reservations.listing.user.email, @reservations.id).deliver_later
+			# ReservationMailer.reservation_email(current_user.email, @reservations.listing.user.email, @reservations.id).deliver_later
 
+			ReservationJob.perform_now(@reservations)
 
 			flash[:success] = "Payment Successful"
 			redirect_to reservation_path(@reservations)

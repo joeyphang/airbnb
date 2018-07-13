@@ -1,7 +1,10 @@
 class ReservationJob < ApplicationJob
-  queue_as :default
+	queue_as :default
 
-  def perform(*args)
-    # Do something later
-  end
+	def perform(reservation)
+
+		ReservationMailer.reservation_email(reservation.user.email, reservation.listing.user.email, reservation.id).deliver_later
+
+    	# Do something later
+	end
 end
