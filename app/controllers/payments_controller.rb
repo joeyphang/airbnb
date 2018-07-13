@@ -30,17 +30,20 @@ class PaymentsController < ApplicationController
 	   	:submit_for_settlement => true
 	   }
 	   )
-
 		if result.success?
 			@reservations.update(:payment => true)
+			ReservationMailer.reservation_email(current_user.email, @reservations.listing.user.email, @reservations.id).deliver_later
+
 
 			flash[:success] = "Payment Successful"
 			redirect_to reservation_path(@reservations)
-			
+
+
 		else
 			flash[:error] =  "Transaction failed. Please try again."
 			redirect_to root_path
 		end
+		
 	end
 
 end
