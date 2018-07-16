@@ -70,6 +70,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'braintree'
-gem 'bootstrap-sass', '~> 3.3.5'
+gem 'bootstrap-sass', '~> 3.3.5', '>= 3.3.7'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'sidekiq'
+
+

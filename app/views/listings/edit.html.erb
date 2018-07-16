@@ -32,7 +32,7 @@
 	<%= form.check_box :amenities, {multiple:true}, 'towels', nil %> <br/>
 
 	<%= form.label :Upload_Image %> :
-	<%= form.file_field :avatar %>
+	<%= form.file_field :avatar, multiple:true %>
 
 	<%= form.submit %>
 

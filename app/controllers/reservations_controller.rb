@@ -17,8 +17,7 @@ class ReservationsController < ApplicationController
 
 		if @reservations.save
 
-
-			redirect_to root_path 
+			redirect_to reservation_path(@reservations) 
 			flash[:notice] = "Reservation Successful"
 		else
 			redirect_to listing_path(@listing)

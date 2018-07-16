@@ -1,33 +1,42 @@
-<h3>Listing</h3>
-Title: <%= @listing.title %> <br/>
-Description: <%= @listing.title %> <br/>
-Country: <%= @listing.country %> <br/>
-Amenities: <% @listing.amenities.each do |x| %>
-<li>
-	<%= x %>
-</li>
-
-<% end %>
-
-Number of guest: <%= @listing.num_of_guest %> <br/>
-Number of bedroom: <%= @listing.num_of_bedroom %> <br/>
-Number of bath: <%= @listing.num_of_bath %> <br/>
-Price: <%= @listing.price %> <br/> <br/>
-
-
-Listing Status: <%= @listing.verified %> <br/>
-
-<% if current_user.moderator? %>
-	<% if !@listing.verified %>
-		<%= link_to 'Verify', verify_path(@listing), method: :patch %>
-	<% else %>
-		<%= link_to 'Unverify', verify_path(@listing), method: :patch %>
+<div class="container">
+	<% if @listing.avatar != nil %>
+		<% @listing.avatar.each do |img| %>
+		<%= image_tag img.url %>
+		<% end %>
+	<%end %>
+	
+	<h3 class="text-center">Listing</h3>
+	<h5>Title: <br><%= @listing.title %></h5>
+	<h5>Description: <br><%= @listing.title %></h5>
+	<h5>Country: <br><%= @listing.country %></h5>
+	Amenities: <% @listing.amenities.each do |x| %>
+	<li>
+		<%= x %>
+	</li>
 
 	<% end %>
 
-<% end %>
+	Number of guest: <%= @listing.num_of_guest %> <br/>
+	Number of bedroom: <%= @listing.num_of_bedroom %> <br/>
+	Number of bath: <%= @listing.num_of_bath %> <br/>
+	Price: <%= @listing.price %> <br/> <br/>
 
 
-<!-- <#%= @reservations = Reservation.find(params[:id]) %> -->
-<br><%= button_to 'Reserve', new_listing_reservation_path(@listing.id), method: :get %>
+	Listing Status: <%= @listing.verified %> <br/>
+
+	<% if current_user.moderator? %>
+		<% if !@listing.verified %>
+			<%= link_to 'Verify', verify_path(@listing), method: :patch %>
+		<% else %>
+			<%= link_to 'Unverify', verify_path(@listing), method: :patch %>
+
+		<% end %>
+
+	<% end %>
+
+
+	<!-- <#%= @reservations = Reservation.find(params[:id]) %> -->
+	<br><%= button_to 'Reserve', new_listing_reservation_path(@listing.id), method: :get %>
+
+</div>
 

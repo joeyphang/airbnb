@@ -14,11 +14,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "welcome#index"
 
-## creates all crud restful routes
-resources :listings do 
-  resources :reservations
+  ## creates all crud restful routes
+  resources :listings do 
+    resources :reservations
 
-end
+  end
 
 #   resources :reservations do 
 #     resources :payments

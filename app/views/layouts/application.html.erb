@@ -6,28 +6,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
 </head>
 <body>
 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div id="header" class="container-fluid opacity-0.5">
 
-  <div id="header">
-    <% if signed_in? -%>
-    
-      <%= current_user.email %> : 
-      <%= current_user.role %>
+      <a class="navbar-brand" href="/">Home</a>
 
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
-    <% else -%>
+        <% if signed_in? -%>
+
+        <%= current_user.email %> : 
+        <%= current_user.role %>
+
+
+      <%= button_to t(".sign_out"), sign_out_path, method: :delete, :class => "btn btn-primary btn-sm" %>
+      <% else -%>
       <%= link_to t(".sign_in"), sign_in_path %>
-    <% end -%>
-  </div>
+      <% end -%>
+    </div>
 
-  <div id="flash">
-    <% flash.each do |key, value| -%>
+    <div id="flash">
+      <% flash.each do |key, value| -%>
       <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+
+  </nav>
 
   <%= yield %>
 
