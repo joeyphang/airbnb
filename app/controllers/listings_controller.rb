@@ -5,6 +5,11 @@ class ListingsController < ApplicationController
 	## only moderator can verify
 	before_action :check_verification_rights, only: [:verify]
 
+	def index
+		@listing = Listing.all
+		@listing = @listing.page(params[:page]).per(9)
+	end
+
 	def new
 		@listing = Listing.new
 		# imply redirection --- erb "new"

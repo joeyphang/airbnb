@@ -1,0 +1,28 @@
+<div class="row text-center">
+<!-- 	<#% @listing = Listing.page(params[:page]).per(9) %>
+ -->	
+<!-- 	<#% @listing = Listing.all %>
+ --> 	<% @listing.order(:country).each_with_index do |list, index| %>
+	<div class="col-sm-4 offset-sm-1">
+		<div class="card my-3">
+			<div class="card-header"> <img style="width: auto; height: auto;" src=<%= list.avatar%> /></div>
+			<div class="card-body">
+				<p>
+					Country: <%= list.country %> </br>
+					Price: <%= list.price %> </br>
+					Description: <%= list.description %>
+				</p>
+				
+			</div>
+
+			<div class="card-footer bg-light"> <a href="listings/<%= list.id %>">Details</a> </div>
+			
+		</div>
+		
+	</div>
+
+	<% end %>
+	
+</div>
+
+<%= paginate @listing, theme: "twitter-bootstrap-4" %>
