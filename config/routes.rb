@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "welcome#index"
 
+# post 'listings/search' => 'listings#search', as: 'search'
+
   ## creates all crud restful routes
   resources :listings do 
     resources :reservations
@@ -27,6 +29,7 @@ Rails.application.routes.draw do
 
 patch 'listings/:id/verify' => "listings#verify", as: 'verify'
 
+
 resources :reservations, only: [:create, :new, :show]
 
 resources :users, controller:"users", only: [:edit, :update, :show]
@@ -35,6 +38,6 @@ resources :users, controller:"users", only: [:edit, :update, :show]
 get 'reservations/:id/payments/new' => "payments#new", as: 'new_payment'
 post 'reservations/:id/payments/checkout' => "payments#checkout", as: 'payment_checkout'
 
-
+get '/search' => 'listings#search', as: "search"
 
 end

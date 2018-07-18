@@ -5,10 +5,9 @@
 		<% end %>
 	<%end %>
 	
-	<h3 class="text-center">Listing</h3>
-	<h5>Title: <br><%= @listing.title %></h5>
-	<h5>Description: <br><%= @listing.title %></h5>
-	<h5>Country: <br><%= @listing.country %></h5>
+	<h5>Title: <%= @listing.title %></h5>
+	<h5>Description: <%= @listing.title %></h5>
+	<h5>Country: <%= @listing.country %></h5>
 	Amenities: <% @listing.amenities.each do |x| %>
 	<li>
 		<%= x %>

@@ -63,6 +63,30 @@ class ListingsController < ApplicationController
 		end
 	end
 
+	def search
+		@listing = Listing.all
+        @listing = Listing.page(params[:page]).per(4)
+        @listing = @listing.price_range(params[:from],params[:to]) if params[:from].present? || params[:to].present?
+        filtering_params(params).each do |key, value|
+        @listing = @listing.public_send(key, value) if value.present?
+          end
+
+          respond_to do |format|
+              format.html
+              format.js { render :layout => false }
+              format.json { render json: @listing }
+          end    
+
+        # @listing = @listing.city(params[:city]) if params[:city].present?
+
+		
+		# @listing = Listing.where(nil)
+		# @listing = @listing.country_search(params[:country_search]) if params[:country_search].present?
+
+		# render 'search'
+		
+	end
+
 
 	private
 
@@ -83,6 +107,10 @@ class ListingsController < ApplicationController
 			flash[:error] = "Access Denied"
 				redirect_to root_path
 			end
+		end
+
+		def filtering_params(params)
+			params.slice(:country, :title, :num_of_guest, :num_of_bedroom)
 		end
 
 	end

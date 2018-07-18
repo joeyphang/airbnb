@@ -1,0 +1,62 @@
+<div class=“container”>
+    <%= form_tag search_path, method: :get do %>
+      <div>
+          <h5><%= label_tag "Country" %>:</h5>
+          <%= text_field_tag :country, "" ,:id => 'country', list: 'checkCountry' %><br>
+          <datalist id="checkCountry" ></datalist>
+      </div>
+
+      <div>
+          <h5><%= label_tag "Title" %>:</h5>
+          <%= text_field_tag :title %>
+      </div>
+
+      <div>
+          <h5><%= label_tag "Max guests" %>:</h5>
+          <%= text_field_tag :num_of_guest %>
+      </div>
+
+      <div>
+          <h5><%= label_tag "Number of Bedrooms" %>:</h5>
+          <%= text_field_tag :num_of_bedroom %>
+      </div>
+
+      <div>
+          <h5><%= label_tag "Price range" %>:</h5>
+          From : <%= text_field_tag :from %>
+          To : <%= text_field_tag :to %>
+      </div>
+      
+      <div class=“my-2”>
+          <%= submit_tag "Search", :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class=“row”>
+        <div class=“col-md-4”>
+            <% @listing.order(updated_at: :desc).each do |listing| %> 
+
+            <% if listing.avatar != nil %>
+			<img src="<%= listing.avatar %>">
+			<% end %>
+          
+              <p>Title: <%= listing.title %></p>
+              <p>Country: <%= listing.country %></p>
+              <p>Max guests: <%= listing.num_of_guest %></p>
+              <p>Number of bedrooms: <%= listing.num_of_bedroom %></p>
+
+              <p>Price: <%= listing.price %></p>
+
+            <%= link_to 'Show', listing_path(listing) %> |
+            <%= link_to 'Make reservation', new_listing_reservation_path(listing), data:
+                   { turbolinks: false } %>
+
+            <hr>
+
+            <% end %>    
+        </div>
+    </div>
+    
+    <%= paginate @listing %>
+</div>
+
