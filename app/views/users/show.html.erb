@@ -1,4 +1,6 @@
+<div class="profile_page">
 <% if signed_in? -%>
+
     	<h3> Profile Details </h3>
     	<%= image_tag @users.avatar_url.to_s %> <br/>
     	User Email:
@@ -12,9 +14,8 @@
 	      	<%= image.label :Upload_Image %> :
 			<%= image.file_field :avatar %> <hr>
 			<%= image.submit %>
-
-			
-		
-
 		<% end %>
+
 <% end %>
+
+</div>

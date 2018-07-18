@@ -12,7 +12,6 @@ class ListingsController < ApplicationController
 
 	def new
 		@listing = Listing.new
-		# imply redirection --- erb "new"
 	end
 
 	def create

@@ -1,10 +1,10 @@
 <div class="container">
-	<% if @listing.avatar != nil %>
-		<% @listing.avatar.each do |img| %>
+	 <% if @listing.avatar != nil %>
+        <% @listing.avatar.each do |img| %>
 		<%= image_tag img.url %>
 		<% end %>
-	<%end %>
-	
+      <% end %>
+
 	<h5>Title: <%= @listing.title %></h5>
 	<h5>Description: <%= @listing.title %></h5>
 	<h5>Country: <%= @listing.country %></h5>
