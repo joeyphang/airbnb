@@ -17,22 +17,22 @@
 
 $(function() {
 
-  $('#city').on('keypress', function(e){
+  $('#country').on('keypress', function(e){
    $.ajax({
      url: 'search',
      method: 'GET',
      data: $(this).serialize(),
      dataType: 'json',
      success: function(data){
-       let checkCity = document.getElementById("checkCity");
+       let checkCountry = document.getElementById("checkCountry");
        // let city = document.getElementById("city");
-       checkCity.innerHTML = "";
+       checkCountry.innerHTML = "";
 
        data.forEach(function(listing){
          const option = document.createElement("option");
 
-         option.value = listing.city;
-         checkCity.append(option);
+         option.value = listing.country;
+         checkCountry.append(option);
        })
      }
    })

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container_listing">
 	 <% if @listing.avatar != nil %>
         <% @listing.avatar.each do |img| %>
 		<%= image_tag img.url %>
@@ -23,7 +23,7 @@
 
 	Listing Status: <%= @listing.verified %> <br/>
 
-	<% if current_user.moderator? %>
+	<% if current_user.Moderator? %>
 		<% if !@listing.verified %>
 			<%= link_to 'Verify', verify_path(@listing), method: :patch %>
 		<% else %>

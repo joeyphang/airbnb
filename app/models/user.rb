@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :listings, dependent: :destroy
   has_many :reservations, dependent: :destroy
 
-  enum role: {customer: 0, moderator: 1, admin: 2}
+  enum role: {Customer: 0, Moderator: 1, Admin: 2}
 
   mount_uploader :avatar, AvatarUploader
 

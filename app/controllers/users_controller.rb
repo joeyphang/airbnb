@@ -18,7 +18,7 @@ class UsersController < Clearance::UsersController
 
 	def show
 		@users = User.find(params[:id])
-
+		@listing = Listing.new
 	end
 
 	def edit #get

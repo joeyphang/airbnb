@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
 
 	before_action :require_login, only: [:new, :create, :delete] # method
-	before_action :check_update_rights, only: [:edit, :update]
+	before_action :check_update_rights, only: [:edit, :update, :destroy]
 	## only moderator can verify
 	before_action :check_verification_rights, only: [:verify]
 
@@ -27,12 +27,10 @@ class ListingsController < ApplicationController
 
 	def show
 		@listing = Listing.find(params[:id])
-		
 	end
 
 	def edit  ## only current_user || admin can edit
 		@listing = Listing.find(params[:id])
-
 	end
 
 	def update
@@ -44,8 +42,10 @@ class ListingsController < ApplicationController
 		end
 	end
 
-
 	def destroy
+		@listing = Listing.find(params[:id])
+    	@listing.destroy
+    	redirect_to listings_path, :notice => "Listing deleted"
 	end
 
 	def verify
@@ -75,15 +75,6 @@ class ListingsController < ApplicationController
               format.js { render :layout => false }
               format.json { render json: @listing }
           end    
-
-        # @listing = @listing.city(params[:city]) if params[:city].present?
-
-		
-		# @listing = Listing.where(nil)
-		# @listing = @listing.country_search(params[:country_search]) if params[:country_search].present?
-
-		# render 'search'
-		
 	end
 
 
@@ -96,13 +87,13 @@ class ListingsController < ApplicationController
 
 		def check_update_rights
 			@listing = Listing.find(params[:id])
-			if current_user.id != @listing.user_id && !current_user.admin?
+			if current_user.id != @listing.user_id && !current_user.Admin?
 				redirect_to root_path
 			end
 		end
 
 		def check_verification_rights
-			if !current_user.moderator?
+			if !current_user.Moderator?
 			flash[:error] = "Access Denied"
 				redirect_to root_path
 			end

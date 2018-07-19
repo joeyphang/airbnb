@@ -1,34 +1,37 @@
-<div class="row text-center">
+<div class="row text-center" style="padding-left:10px; padding-right: 10px;">
 
-<% @listing.order(:country).each_with_index do |list, index| %>
+	<% @listing.order(:country).each_with_index do |listing, index| %>
 
 	<div class="col-sm-4">
 		<div class="card my-3">
+			<!-- Header -->
 			<div class="card-header">
-
-				<%if list.avatar != nil %>
-					<img style="width: auto; height: auto;" src=<%= list.avatar[0]%> />
+				<%if listing.avatar != nil %>
+					<img style="width: auto; height: auto;" src=<%= listing.avatar[0]%> />
 				<% else %>
-					<img style="width: auto; height: auto;" src="https://www.nato-pa.int/sites/default/files/default_images/default-image.jpg"/>
-
+					<img style="width: auto; height: auto;" src= "https://www.nato-pa.int/sites/default/files/default_images/default-image.jpg"/>
 				<% end %>
-
 			</div>
+			<!-- Body -->
 			<div class="card-body">
 				<p>
-					Country: <%= list.country %> </br>
-					Price: <%= list.price %> </br>
-					Description: <%= list.description %>
+					Country: <%= listing.country %> </br>
+					Price: <%= listing.price %> </br>
+					Description: <%= listing.description %>
 				</p>
-				
 			</div>
+			<!-- Footer -->
+			<div class="card-footer bg-light"> 
+				<a href="listings/<%= listing.id %>">Details</a> | 
+				<a href="listings/<%= listing.id%>/edit ">Update</a> |
+				<%= link_to "Delete", listing_path(listing.id), :method => :delete, data: {:confirm => "Are you sure?"} %>
 
-			<div class="card-footer bg-light"> <a href="listings/<%= list.id %>">Details</a> | <a href="listings/<%= list.id%>/edit ">Update</a> </div>
+			</div>
 		</div>
 		
 	</div>
 
-<% end %>
+	<% end %>
 
 </div>
 

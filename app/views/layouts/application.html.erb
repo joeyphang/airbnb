@@ -11,12 +11,9 @@
 <body>
 
   <ul class="nav bg-dark d-flex justify-content-around">
+    <% if signed_in? -%>
     <li class="nav-item1" >
-      <% if signed_in? -%>
       <%= button_to t(".sign_out"), sign_out_path, method: :delete, :class => "btn btn-outline-danger btn-sm" %>
-      <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
-      <% end -%>
     </li>
 
     <li class="nav-item">
@@ -28,18 +25,17 @@
     </li>
 
     <li class="nav-item">
-
       <a class="nav-link disabled" href="/users/<%= current_user.id %>">Profile</a>
     </li>
 
     <li class="nav-item2">
-      <% if signed_in? -%>
 <!--       <#%= current_user.email %> : 
  -->      <%= current_user.role %>
-      <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
-      <% end -%>
     </li>
+
+    <% else -%>
+      <%= link_to t(".sign_in"), sign_in_path %>
+    <% end -%>
 
   </ul>
 
@@ -48,8 +44,6 @@
       <div id="flash_<%= key %>"><%=h value %></div>
       <% end %>
     </div>
-
-
 
   <%= yield %>
 

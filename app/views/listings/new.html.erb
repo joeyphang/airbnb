@@ -1,7 +1,8 @@
-New listing form <hr>
+<div class="listing_form">
+New listing form <br/>
 
 
-<%= form_with  model: @listing do |form| %>
+<br><%= form_with  model: @listing do |form| %>
 	<%= form.label :title %> :
 	<%= form.text_field :title, autocomplete: :off %> <br/>
 
@@ -34,3 +35,5 @@ New listing form <hr>
 	<%= form.submit %>
 
 <% end %>
+
+</div>

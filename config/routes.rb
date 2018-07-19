@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   ## creates all crud restful routes
   resources :listings do 
     resources :reservations
-
   end
 
 #   resources :reservations do 
