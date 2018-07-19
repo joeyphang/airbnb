@@ -14,3 +14,27 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+
+  $('#country').on('keypress', function(e){
+   $.ajax({
+     url: 'search',
+     method: 'GET',
+     data: $(this).serialize(),
+     dataType: 'json',
+     success: function(data){
+       let checkCountry = document.getElementById("checkCountry");
+       // let city = document.getElementById("city");
+       checkCountry.innerHTML = "";
+
+       data.forEach(function(listing){
+         const option = document.createElement("option");
+
+         option.value = listing.country;
+         checkCountry.append(option);
+       })
+     }
+   })
+ });
+})

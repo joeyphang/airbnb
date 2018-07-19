@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -48,6 +48,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "letter_opener"
 end
 
 group :test do
@@ -60,3 +61,19 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+ 
+gem 'clearance'
+gem 'figaro'
+gem 'country_select'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+gem 'braintree'
+gem 'bootstrap-sass', '~> 3.3.5', '>= 3.3.7'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'sidekiq'
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
+
+
